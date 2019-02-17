@@ -23,14 +23,22 @@ const client = new ApolloClient({
     cache: new InMemoryCache()
 });
 
-ReactDOM.render(
-    <ApolloProvider client={client}>
-        <Provider store={store}>
-            <Routes />
-        </Provider>,
+const startApp = () => {
+    ReactDOM.render(
+        <ApolloProvider client={client}>
+            <Provider store={store}>
+                <Routes />
+            </Provider>,
     </ApolloProvider>,
-    document.getElementById('root')
-);
+        document.getElementById('root')
+    );
 
-// ReactDOM.render(<App />, document.getElementById('root'));
-registerServiceWorker();
+    // ReactDOM.render(<App />, document.getElementById('root'));
+    registerServiceWorker();
+}
+
+if (window.cordova) {
+    document.addEventListener('deviceready', startApp, false);
+} else {
+    startApp();
+}
