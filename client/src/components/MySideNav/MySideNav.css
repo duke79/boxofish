@@ -1,0 +1,201 @@
+:root{
+    --MySideNav-Var-Width: 256px;
+    --MySideNav-Var-Item-FontSize: 14px;
+    --MySideNav-Var-Brand-FontSize: 22px;
+}
+
+button, select, html, textarea, input {
+    font-family: Roboto,"Helvetica Neue",sans-serif;
+}
+
+/* width */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: #999;
+    border: 2px solid rgba(0, 0, 0, 0);
+    background-clip: padding-box;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    background: #aaa;
+    border: 2px solid rgba(0, 0, 0, 0);
+    background-clip: padding-box;
+}
+
+/* .Hidden{
+
+} */
+
+.MySideNav_Wrapper{
+    position: fixed;
+    /* z-index: 100; */
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: var(--MySideNav-Var-Width);
+    padding-bottom: 53px; /*so that container is not overlapped by footer*/
+    transition:left 0.2s linear;
+    transition-timing-function: ease-out;
+}
+
+/* added specific selector (div.) so that it will have preference over the .MySideNav-Wrapper),
+although it wasn't requried in this case since this class is defined after .MySideNav-Wrapper */
+div.MySideNav_Wrapper.Hidden{
+    left: calc(-1 * var(--MySideNav-Var-Width));
+}
+
+.MySideNav_Scrim{
+    background: rgba(0,0,0,.4);
+    cursor: pointer;
+    position: fixed;
+    left: var(--MySideNav-Var-Width);
+    top: 0;
+    right: 0;
+    bottom: 0;
+    transition:left 0.2s linear;
+    /* transition-delay: 2s; */
+    z-index: 20;
+    transition-timing-function: ease-out;
+}
+
+.MySideNav_Scrim.Hidden{
+    left: calc(-1 * var(--MySideNav-Var-Width));
+    visibility: hidden;
+}
+
+.MySideNav_Wrapper, ::-webkit-scrollbar-track, .MySideNav_Footer{
+    background-color: #1d1d1e;
+}
+
+.MySideNav_Header{
+    display: block;
+}
+
+.MySideNav_Container{
+    overflow: scroll;
+    height: 100%;
+    padding-bottom: 12px;
+}
+
+.MySideNav_Footer{
+    display: block;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    border-top: 1px solid #404854; /*to display a border line at the top of the footer*/
+}
+
+.MySideNav_Brand{
+    display: block;
+    font-size: var(--MySideNav-Var-Brand-FontSize);
+    color: #eee;
+    font-weight: 400;
+    text-decoration: none; /*so that underline is gone, which still stays after click unless clicked elsewhere*/
+}
+
+
+.MySideNav_Item{
+    display: block;
+}
+
+
+.MySideNav_SubItem{
+    display: block;
+    padding: 6px 40px; /*so that has padding bigger than normal items*/
+}
+
+.MySideNav_Brand, .MySideNav_Item, .MySideNav_SubTitle, .MySideNav_Footer{
+    padding: 6px 24px; /*to have some padding on both sides*/
+}
+
+.MySideNav_Brand, .MySideNav_Item, .MySideNav_SubMenu{
+    border-bottom: 1px solid #404854; /*to display a border line*/
+}
+
+.MySideNav_Item, .MySideNav_SubItem, .MySideNav_SubTitle, .MySideNav_Footer{
+    color: rgba(255,255,255,.7);
+    font-size: var(--MySideNav-Var-Item-FontSize);
+    font-weight: 500;
+    text-decoration: none; /*so that underline is gone, which still stays after click unless clicked elsewhere*/
+}
+
+.MySideNav_Brand:hover, .MySideNav_Item:hover, .MySideNav_SubItem:hover, .MySideNav_SubTitle:hover, .MySideNav_Footer:hover{
+    background-color: black;
+    color: rgba(255,255,255,.7);
+    cursor: pointer; /*so that cursor displays even on div*/
+}
+
+.MySideNav_SubMenu{
+    display: block;
+}
+
+.MySideNav_SubTitle{
+    display: block;
+    color: #fff;
+    position: relative;
+    background-color: #262f3d;
+}
+
+.MySideNav_SubItems_Container{
+    /* padding-top: 7px; */
+    display: none;
+}
+
+/*Moved to insline style because the class name is not mangled (it comes from third party)*/
+/* a.active{
+    color: #4fc3f7;
+} */
+
+.MySideNav_CaretDown{
+    position: absolute;
+    right: 8px;
+    top: 11px;
+}
+
+.rotate{
+    -moz-transition: all 2s linear;
+    -webkit-transition: all 2s linear;
+    transition: all 0.2s linear;
+}
+
+.rotate.down{
+    -ms-transform: rotate(-180deg);
+    -moz-transform: rotate(-180deg);
+    -webkit-transform: rotate(-180deg);
+    transform: rotate(-180deg);
+}
+
+
+/* Small devices (tablets, 768px and up) */
+@media (min-width: 768px) {
+
+    .MySideNav_Scrim{
+        display: none;
+    }
+
+    div.MySideNav_Wrapper.Hidden{
+        left: 0px;
+    }
+
+ }
+
+/* Medium devices (desktops, 992px and up) */
+@media (min-width: 992px) {
+
+}
+
+/* Large devices (large desktops, 1200px and up) */
+@media (min-width: 1200px) {
+
+}

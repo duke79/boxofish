@@ -1,0 +1,75 @@
+:root {
+    --MyTopNav-Var-Height: 48px;
+    --MyTopNav-Var-Width: calc(100% - var(--MySideNav-Var-Width))
+}
+
+.Wrapper {
+    background-color: #005dffb3;
+    position: fixed;
+    width: 100%;
+    height: var(--MyTopNav-Var-Height);
+    /* margin-left: 200px; */
+    display: flex;
+}
+
+.MenuIcon {
+    position: absolute;
+    left: 15px;
+    top: 10px;
+    font-size: 24px !important;
+    /*simplemde messing with font-awesome? Though fixed with autoDownloadFontAwesome:false option*/
+    color: rgba(255, 255, 255, .7);
+    cursor: pointer;
+}
+
+.MenuIcon:hover {
+    color: rgba(255, 255, 255, 0.95);
+}
+
+.firstHalf {
+    flex-grow: 0.618034;
+}
+
+.secondHalf {
+    flex-grow: 0.381966;
+    margin-right: 20px;
+}
+
+.item {
+    /* width: 20px; */
+    display: inline-block;
+    padding-top: 13px;
+    padding-left: 8px;
+    color: white;
+    font-weight: 600;
+    cursor: pointer;
+    float: right;
+}
+
+.divider {
+    padding-left: 7px;
+    color: #ffffff6e;
+    float: right;
+    padding-top: 13px;
+}
+
+/* Small devices (tablets, 768px and up) */
+
+@media (min-width: 768px) {
+    .Wrapper {
+        margin-left: var(--MySideNav-Var-Width);
+        width: var(--MyTopNav-Var-Width);
+    }
+    .MenuIcon {
+        display: none !important;
+        /*simplemde messing with font-awesome? Though fixed with autoDownloadFontAwesome:false option*/
+    }
+}
+
+/* Medium devices (desktops, 992px and up) */
+
+@media (min-width: 992px) {}
+
+/* Large devices (large desktops, 1200px and up) */
+
+@media (min-width: 1200px) {}

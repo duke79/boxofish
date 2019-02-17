@@ -1,0 +1,25 @@
+.wrapper {}
+
+.box {
+    padding: 6px;
+    padding-left: 10px;
+    border-radius: 3px;
+    border: 1px solid #00000029;
+    box-shadow: 0 0 1px rgba(81, 198, 238, 0.15);
+    outline: none;
+    font-size: 1.2em;
+    transition: box-shadow 0.2s;
+    width: 100%;
+}
+
+.box:hover {
+    box-shadow: 0 0 5px 0px #007cfa;
+}
+
+.box:focus {
+    box-shadow: 0 0 5px 0px #007cfa;
+}
+
+::placeholder {
+    color: #00000052;
+}

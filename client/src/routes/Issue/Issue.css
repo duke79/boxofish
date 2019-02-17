@@ -1,0 +1,88 @@
+.Wrapper{
+    /* position:absolute; */
+    /* width: 100%; */
+}
+
+.Discussion{
+    margin-left: 0px;
+    margin-right: 0px;
+    margin-bottom: 20px;
+}
+
+.Editor{
+    padding-top: 9px;
+    padding-bottom: 9px;
+    padding-left: 9px;
+    padding-right: 9px;
+    border: 1px solid #d1d5da;
+}
+
+/* .Editor-Header{
+    background-color: #f6f8fa;
+} */
+
+.Editor-Footer{
+    position: relative;
+    padding-bottom: 54px;
+}
+
+.Editor-Submit{
+    font-weight: 600;
+    position: sticky;
+    float: right;
+    margin-top: 20px;
+    width: 110px;
+    height: 35px;
+    color: #fff;
+    background-color: #039be5;
+    transition: background-color 100ms linear;
+    /* background-image: linear-gradient(-180deg, #34d058 0%, #28a745 90%); */
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.1), 0 6px 20px 0 rgba(0, 0, 0, 0.1);
+    outline:none;
+    text-decoration: none;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+.Editor-Submit:hover{
+    background-color: #037bc5;
+    /* background-image: linear-gradient(-180deg, #1a8432 0%, #1b8333 90%); */
+    /* box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.2); */
+}
+
+.CodeMirror {
+    /* height: 100px; */
+
+    /* https://stackoverflow.com/questions/13977276/codemirror-textarea-resizable-like-a-standard-textarea */
+    /* resize: vertical;
+    overflow: auto !important; */
+}
+
+/* Controls the CodeMirror editor */
+.CodeMirror, .CodeMirror-scroll {
+    min-height: 100px;
+    max-height: 200px;
+}
+
+/* Controls the editor header*/
+.editor-toolbar {
+    background-color: #f6f8fa;
+}
+
+/* Small devices (tablets, 768px and up) */
+@media (min-width: 768px) {
+    .Discussion{
+        margin-left: 200px;
+        margin-right: 200px;
+    }
+ }
+
+/* Medium devices (desktops, 992px and up) */
+@media (min-width: 992px) {
+
+}
+
+/* Large devices (large desktops, 1200px and up) */
+@media (min-width: 1200px) {
+
+}

@@ -1,0 +1,7 @@
+.Card_Wrapper{
+    box-shadow: 0 6px 40px rgba(0,0,0,.3);
+    padding: 1em;
+    width: calc(10em + 1vw);
+    background-color: #fff;
+    border-radius: 11px;
+}

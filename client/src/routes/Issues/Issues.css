@@ -1,0 +1,125 @@
+.Wrapper {
+    /* background-color: rebeccapurple; */
+    padding-bottom: 100px;
+}
+
+.Actions {
+    padding-top: 16px;
+    padding-bottom: 23px;
+    display: flex;
+}
+
+.Actions_Item {
+    flex-shrink: 2;
+    /* flex-basis: 291px; */
+    flex-basis: 485px;
+}
+
+.Actions_Gap {
+    flex: 1 0 10px;
+}
+
+.Actions_EndItem {
+    margin-left: auto;
+    flex-shrink: 0;
+}
+
+.Container {}
+
+.Container-Header,
+.Container-Item:hover {
+    background-color: #f6f8fa;
+    border: 1px solid #e1e4e8;
+    border-radius: 3px 3px 0 0;
+}
+
+.Container-Item {
+    margin-top: -1px;
+    border: 1px solid #e1e4e8;
+    /* border-radius: 3px 3px 0 0; */
+    border-top-color: transparent;
+    border-top-left-radius: 2px;
+    border-top-right-radius: 2px;
+}
+
+.Container-Header {
+    display: flex;
+}
+
+.Filters,
+.Container-Header-States {
+    padding-top: 13px;
+    padding-bottom: 13px;
+}
+
+.Container-Header-States {
+    display: flex;
+    padding-left: 16px;
+    flex-grow: 3;
+}
+
+.Filters {
+    /* display: block; */
+    padding-right: 16px;
+    flex-grow: 4;
+    justify-content: flex-end;
+    /* To make the items float to right*/
+}
+
+.Container-Header-Open {
+    font-weight: 600;
+}
+
+.Container-Header-Close {
+    margin-left: 10px;
+}
+
+.Filter {
+    /* text-align: right; */
+    position: relative;
+    display: inline-block;
+    float: right;
+    padding-right: 15px;
+    padding-left: 15px;
+    cursor: pointer;
+    /* flex-grow: 1; */
+}
+
+.Container-Item {}
+
+.Container-Item-Container {
+    padding-left: 16px;
+    padding-top: 8px;
+    padding-bottom: 8px;
+    line-height: 1.25;
+    width: 75%;
+}
+
+.Container-Item-Title {
+    text-decoration: none;
+    font-size: 16px;
+    font-weight: 600;
+    color: black;
+}
+
+.Container-Item-Title:hover {
+    color: #0366d6;
+}
+
+.Container-Item-Info {
+    display: flex;
+    margin-top: 4px;
+    font-size: 12px;
+}
+
+.Container-Item-Info-Item {
+    margin-right: 5px;
+}
+
+.Filter-Text {
+    float: left;
+}
+
+.Filter-CaretDown {
+    margin-left: 6px;
+}

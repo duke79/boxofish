@@ -1,0 +1,38 @@
+.root{
+    z-index: -100;
+}
+
+.Wrapper{
+    position: fixed;
+    left: 0;
+    /* margin-top: 48px; */
+    top: var(--MyTopNav-Var-Height);
+    bottom: 0;
+    right: 0;
+    overflow: auto;
+    padding-left: 15px;
+    padding-right: 15px;
+    /*z-index: -1;*/ /*To make SideNav-Scrim clickable */ /*now being handled through js*/
+}
+
+/* Small devices (tablets, 768px and up) */
+@media (min-width: 768px) {
+
+    .Wrapper{
+        /* margin-left: 256px; */
+        left: var(--MySideNav-Var-Width);
+        padding-left: 30px;
+        padding-right: 30px;
+    }
+
+ }
+
+/* Medium devices (desktops, 992px and up) */
+@media (min-width: 992px) {
+
+}
+
+/* Large devices (large desktops, 1200px and up) */
+@media (min-width: 1200px) {
+
+}

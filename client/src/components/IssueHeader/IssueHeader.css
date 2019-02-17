@@ -1,0 +1,76 @@
+.IssueHeader_Wrapper{
+
+}
+
+/* .IssueHeader-Info{
+
+} */
+
+.IssueHeader_Title{
+    /* margin-bottom: 2px; */
+    font-size: 2em;
+    font-weight: 500;
+    color: grey;
+    margin-bottom: 25px;
+    margin-top: 16px;
+}
+
+.IssueHeader_Meta{
+    margin-bottom: 15px;
+    padding-bottom: 20px;
+    /* margin-top: 8px; */
+    font-size: 14px;
+    line-height: 20px;
+    color: #586069;
+    border: 1px solid #d0d8d8;
+    padding: 21px;
+    box-shadow: 0 0 9px #e2e2e2;
+    border-radius: 7px;
+    /* margin-left: -27px; */
+}
+
+.IssueHeader_Meta > span {
+    font-size:16px;
+    /* font-style: italic; */
+    /* margin-top:20px; */
+    padding-left:10px;
+    /* display:block; */
+}
+
+.IssueHeader_Status{
+    background-color: #2cbe4e;
+    display: inline-block;
+    padding: 4px 8px;
+    font-weight: 600;
+    line-height: 20px;
+    color: #fff;
+    text-align: center;
+    border-radius: 3px;
+    box-sizing: border-box;
+
+    padding-bottom: 7px;
+    padding-left: 5pxx;
+    padding-right: 10px;
+    border-radius: 5px;
+}
+
+/* .IssueHeader_IssuableInfo{
+    margin-bottom: 2px;
+    font-weight: 600;
+} */
+
+/* .IssueHeader_Reference{
+    margin-bottom: 2px;
+    font-weight: 600;
+} */
+
+.IssueHeader_Authored{
+    /* margin-bottom: 2px; */
+    font-weight: 600;
+}
+
+.IssueHeader_Author{
+    /* margin-bottom: 2px; */
+    font-weight: 600;
+}
+
