@@ -32,3 +32,5 @@
 # resources/signing
 
 platforms/
+node_modules/
+www/
