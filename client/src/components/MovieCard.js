@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { withStyles } from "@material-ui/core/styles";
+import {withStyles} from "@material-ui/core/styles";
 import Card from "@material-ui/core/Card";
 import CardActions from "@material-ui/core/CardActions";
 import CardContent from "@material-ui/core/CardContent";
@@ -8,7 +8,7 @@ import CardMedia from "@material-ui/core/CardMedia";
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
 
-import { createMuiTheme } from "@material-ui/core/styles";
+import {createMuiTheme} from "@material-ui/core/styles";
 import blue from "@material-ui/core/colors/blue";
 
 const theme = createMuiTheme({
@@ -35,7 +35,7 @@ const styles = {
 };
 
 function MovieCard(props) {
-    const { classes } = props;
+    const {classes} = props;
     return (
         <div>
             <Card className={classes.card}>
@@ -56,7 +56,7 @@ function MovieCard(props) {
 
                 <CardActions>
                     {props.buttons
-                        ? props.buttons.map(function(btn) {
+                        ? props.buttons.map(function (btn) {
                             return (
                                 <Button size="small" color="primary">
                                     {btn}
