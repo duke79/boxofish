@@ -52,10 +52,9 @@ function Poster(props) {
             lg={2}
             {...props}>
             <MovieCard
-                title={props.title ? props.title : null}
                 detail=""
                 buttons=""
-                poster={props.poster}/>
+                {...props}/>
         </Grid>
     );
 }
@@ -63,6 +62,7 @@ function Poster(props) {
 const PosterS = styled(props => <Poster {...props}/>)`
 && {
   margin: 0px;
+  background-color: #d7dee5;
 }
 `;
 
