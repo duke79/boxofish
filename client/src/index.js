@@ -17,6 +17,7 @@ import { ApolloClient } from 'apollo-client'
 import { createHttpLink } from 'apollo-link-http'
 import { InMemoryCache } from 'apollo-cache-inmemory'
 import MovieList from "./components/MovieList";
+import Menu from "./components/Menu";
 
 const httpLink = createHttpLink({
     uri: 'http://localhost:5000/graph'
@@ -31,7 +32,7 @@ const startApp = () => {
     ReactDOM.render(
         <ApolloProvider client={client}>
             <Provider store={store}>
-                <MovieList />
+                <Menu />
             </Provider>,
     </ApolloProvider>,
         document.getElementById('root')
@@ -39,7 +40,7 @@ const startApp = () => {
 
     // ReactDOM.render(<App />, document.getElementById('root'));
     registerServiceWorker();
-}
+};
 
 if (window.cordova) {
     document.addEventListener('deviceready', startApp, false);
