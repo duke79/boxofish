@@ -19,6 +19,7 @@ const theme = createMuiTheme({
 
 const styles = {
     card: {
+        height: 250,
         [theme.breakpoints.down("sm")]: {
             // maxWidth: 150,
             // maxHeight: 200
@@ -30,7 +31,8 @@ const styles = {
     },
     media: {
         height: 0,
-        paddingTop: "56.25%" // 16:9
+        // paddingTop: "56.25%" // 16:9
+        paddingTop: "86.25%" // 16:9
     }
 };
 
@@ -41,12 +43,12 @@ function MovieCard(props) {
             <Card className={classes.card}>
                 <CardMedia
                     className={classes.media}
-                    image="https://ak1.picdn.net/shutterstock/videos/11694011/thumb/1.jpg"
+                    image={props.poster ? props.poster : null}
                     //image="https://material-ui.com/static/images/cards/contemplative-reptile.jpg"
-                    title="Contemplative Reptile"
+                    title={props.title ? props.title : null}
                 />
                 <CardContent>
-                    <Typography gutterBottom variant="headline" component="h2">
+                    <Typography gutterBottom component="p">
                         {props.title ? props.title : null}
                     </Typography>
                     <Typography component="p">
@@ -79,7 +81,8 @@ MovieCard.defaultProps = {
     detail:
         "Lizards are a widespread group of squamate reptiles, with over 6,000\
                 species, ranging across all continents except Antarctica",
-    buttons: ["Share", "Learn more"]
+    buttons: ["Share", "Learn more"],
+    poster: "https://ak1.picdn.net/shutterstock/videos/11694011/thumb/1.jpg"
 };
 
 export default withStyles(styles)(MovieCard);
