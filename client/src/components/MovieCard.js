@@ -1,6 +1,4 @@
 import React from "react";
-import PropTypes from "prop-types";
-import {withStyles} from "@material-ui/core/styles";
 import Card from "@material-ui/core/Card";
 import CardActions from "@material-ui/core/CardActions";
 import CardContent from "@material-ui/core/CardContent";
@@ -8,41 +6,25 @@ import CardMedia from "@material-ui/core/CardMedia";
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
 
-import {createMuiTheme} from "@material-ui/core/styles";
-import blue from "@material-ui/core/colors/blue";
+import Grid from "@material-ui/core/Grid";
+import styled from "styled-components";
 
-const theme = createMuiTheme({
-    palette: {
-        primary: blue
-    }
-});
+let S = {};
 
-const styles = {
-    card: {
-        height: 250,
-        [theme.breakpoints.down("sm")]: {
-            // maxWidth: 150,
-            // maxHeight: 200
-        },
-        [theme.breakpoints.up("sm")]: {
-            // maxWidth: 345,
-            // maxHeight: 500
-        }
-    },
-    media: {
-        height: 0,
-        // paddingTop: "56.25%" // 16:9
-        paddingTop: "86.25%" // 16:9
-    }
-};
+S.Card = styled(Card)`
+  height: 250px;
+`;
+
+S.CardMedia = styled(CardMedia)`
+  height: 0;
+  padding-top: 86.25%;
+`;
 
 function MovieCard(props) {
-    const {classes} = props;
     return (
         <div>
-            <Card className={classes.card}>
-                <CardMedia
-                    className={classes.media}
+            <S.Card>
+                <S.CardMedia
                     image={props.poster ? props.poster : null}
                     //image="https://material-ui.com/static/images/cards/contemplative-reptile.jpg"
                     title={props.title ? props.title : null}
@@ -67,14 +49,10 @@ function MovieCard(props) {
                         })
                         : null}
                 </CardActions>
-            </Card>
+            </S.Card>
         </div>
     );
 }
-
-MovieCard.propTypes = {
-    classes: PropTypes.object.isRequired
-};
 
 MovieCard.defaultProps = {
     title: "Lizards",
@@ -85,4 +63,26 @@ MovieCard.defaultProps = {
     poster: "https://ak1.picdn.net/shutterstock/videos/11694011/thumb/1.jpg"
 };
 
-export default withStyles(styles)(MovieCard);
+export default MovieCard;
+
+function Poster(props) {
+    return (
+        <Grid
+            item xs={6}
+            sm={4}
+            md={3}
+            lg={2}
+            {...props}>
+            <MovieCard
+                detail=""
+                buttons=""
+                {...props}/>
+        </Grid>
+    );
+}
+
+export const ResponsivePoster = styled(props => <Poster {...props}/>)`
+&& {
+  margin: 0px;
+}
+`;

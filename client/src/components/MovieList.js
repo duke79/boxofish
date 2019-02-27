@@ -1,72 +1,12 @@
 import React from "react";
 import PropTypes from "prop-types";
-// import { withStyles } from "@material-ui/core/styles";
 import styled from "styled-components";
-import Typography from "@material-ui/core/Typography";
-// import Paper from "@material-ui/core/Paper";
-// import Divider from "@material-ui/core/Divider";
 import Grid from "@material-ui/core/Grid";
+import {ResponsivePoster} from "./MovieCard";
 
-import {createMuiTheme} from "@material-ui/core/styles";
-// import blue from "@material-ui/core/colors/blue";
+let S = {};
 
-import MovieCard from "./MovieCard";
-
-// const theme = createMuiTheme({
-//     // palette: {
-//     //   primary: blue
-//     // }
-// });
-
-// const styles = {
-//   grid: {
-//     [theme.breakpoints.down("sm")]: {},
-//     [theme.breakpoints.up("sm")]: {}
-//   }
-// };
-
-// const styles = theme => ({
-//     // container: {
-//     //   display: "grid",
-//     //   gridTemplateColumns: "repeat(12, 1fr)",
-//     //   gridGap: `${theme.spacing.unit * 3}px`
-//     // },
-//     // paper: {
-//     //   padding: theme.spacing.unit,
-//     //   textAlign: "center",
-//     //   color: theme.palette.text.secondary,
-//     //   whiteSpace: "nowrap",
-//     //   marginBottom: theme.spacing.unit
-//     // },
-//     // divider: {
-//     //   margin: `${theme.spacing.unit * 2}px 0`
-//     // }
-// });
-
-function Poster(props) {
-    return (
-        <Grid
-            item xs={6}
-            sm={4}
-            md={3}
-            lg={2}
-            {...props}>
-            <MovieCard
-                detail=""
-                buttons=""
-                {...props}/>
-        </Grid>
-    );
-}
-
-const PosterS = styled(props => <Poster {...props}/>)`
-&& {
-  margin: 0px;
-  background-color: #d7dee5;
-}
-`;
-
-function MovieGrid(props) {
+function MovieList(props) {
     return (
         <div {...props}>
             <Grid container
@@ -74,7 +14,7 @@ function MovieGrid(props) {
                   justify={"flex-start"}>
                 {props.movies.map(function (movie) {
                     return (
-                        <PosterS
+                        <ResponsivePoster
                             title={movie.title}
                             poster={movie.poster}/>
                     );
@@ -84,28 +24,20 @@ function MovieGrid(props) {
     );
 }
 
-const MovieGridS = styled(MovieGrid)`
+S.MovieList = styled(MovieList)`
 && {
   //margin: 0px;
   //overflow-x: hidden;
   padding: 8px; //https://material-ui.com/layout/grid/#limitations
+  background-color: #d7dee5;
 }
 `;
 
-function MovieList(props) {
-    // const {classes} = props;
-    return (
-        <div>
-            <MovieGridS {...props}/>
-        </div>
-    );
-}
-
-MovieList.propTypes = {
+S.MovieList.propTypes = {
     classes: PropTypes.object.isRequired
 };
 
-MovieList.defaultProps = {
+S.MovieList.defaultProps = {
     movies: [
         {
             title: "Once Upon a Time in America",
@@ -189,6 +121,4 @@ MovieList.defaultProps = {
     ]
 };
 
-const StyledMovieList = styled(MovieList)``;
-// export default withStyles(styles)(MovieList);
-export default StyledMovieList;
+export default S.MovieList;
