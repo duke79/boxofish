@@ -16,8 +16,7 @@ import {ApolloProvider} from 'react-apollo'
 import {ApolloClient} from 'apollo-client'
 import {createHttpLink} from 'apollo-link-http'
 import {InMemoryCache} from 'apollo-cache-inmemory'
-import MovieList from "./components/MovieList";
-import Menu from "./components/Menu";
+import App from "./routes/App";
 
 const httpLink = createHttpLink({
     uri: 'http://localhost:5000/graph'
@@ -32,9 +31,7 @@ const startApp = () => {
     ReactDOM.render(
         <ApolloProvider client={client}>
             <Provider store={store}>
-                <Menu>
-                    <MovieList/>
-                </Menu>
+                <App/>
             </Provider>,
         </ApolloProvider>,
         document.getElementById('root')

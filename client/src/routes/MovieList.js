@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import styled from "styled-components";
 import Grid from "@material-ui/core/Grid";
-import {ResponsivePoster} from "./MovieCard";
+import {ResponsivePoster} from "../components/MovieCard";
 
 let S = {};
 
