@@ -2,8 +2,10 @@ import React from "react";
 import styled from "styled-components";
 import Grid from "@material-ui/core/Grid";
 import {ResponsivePoster} from "../components/MovieCard";
+
 import {observer} from "mobx-react";
 import store from "./Store"
+import InfiniteScroll from 'react-infinite-scroller';
 
 let S = {};
 
@@ -13,17 +15,27 @@ function MovieList(props) {
 
     return (
         <div {...props}>
-            <Grid container
-                  spacing={16}
-                  justify={"flex-start"}>
-                {store.top_rated_movies ? store.top_rated_movies.map(function (movie) {
-                    return (
-                        <ResponsivePoster
-                            title={movie.title}
-                            poster={tmdb_images_prefix + movie.poster_path}/>
-                    );
-                }) : null}
-            </Grid>
+            <InfiniteScroll
+                pageStart={0}
+                loadMore={() => {
+                    // console.log("Load more...");
+                    store.set_page(store.page + 1);
+                }}
+                hasMore={true || false}
+                loader={<div className="loader" key={0}>Loading ...</div>}
+            >
+                <Grid container
+                      spacing={16}
+                      justify={"flex-start"}>
+                    {store.top_rated_movies ? store.top_rated_movies.map(function (movie) {
+                        return (
+                            <ResponsivePoster
+                                title={movie.title}
+                                poster={tmdb_images_prefix + movie.poster_path}/>
+                        );
+                    }) : null}
+                </Grid>
+            </InfiniteScroll>
         </div>
     );
 }
@@ -37,8 +49,7 @@ S.MovieList = styled(observer(MovieList))`
 }
 `;
 
-S.MovieList.defaultProps = {
-};
+S.MovieList.defaultProps = {};
 
 export default S.MovieList;
 
