@@ -9,13 +9,13 @@ import registerServiceWorker from './registerServiceWorker';
 import Routes from './routes/Routes'
 
 /*Redux*/
-import { Provider } from 'react-redux'
-import { store } from './redux/store'
+import {Provider} from 'react-redux'
+import {store} from './redux/store'
 /*Apollo*/
-import { ApolloProvider } from 'react-apollo'
-import { ApolloClient } from 'apollo-client'
-import { createHttpLink } from 'apollo-link-http'
-import { InMemoryCache } from 'apollo-cache-inmemory'
+import {ApolloProvider} from 'react-apollo'
+import {ApolloClient} from 'apollo-client'
+import {createHttpLink} from 'apollo-link-http'
+import {InMemoryCache} from 'apollo-cache-inmemory'
 import MovieList from "./components/MovieList";
 import Menu from "./components/Menu";
 
@@ -32,9 +32,11 @@ const startApp = () => {
     ReactDOM.render(
         <ApolloProvider client={client}>
             <Provider store={store}>
-                <Menu />
+                <Menu>
+                    <MovieList/>
+                </Menu>
             </Provider>,
-    </ApolloProvider>,
+        </ApolloProvider>,
         document.getElementById('root')
     );
 
