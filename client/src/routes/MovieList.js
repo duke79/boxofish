@@ -5,9 +5,16 @@ import {ResponsivePoster} from "../components/MovieCard";
 
 import {observer} from "mobx-react";
 import store from "./Store"
-import InfiniteScroll from 'react-infinite-scroller';
+import CircularProgress from '@material-ui/core/CircularProgress';
 
 let S = {};
+
+S.CircularProgress = styled(CircularProgress)`
+  &&{
+    margin: 20px auto auto;
+    display: block;
+  }
+`;
 
 class MovieList extends React.Component {
     constructor(props) {
@@ -23,12 +30,11 @@ class MovieList extends React.Component {
         return this_bottom <= window.innerHeight;
     }
 
-    add_scroll_listener(){
+    add_scroll_listener() {
         document.addEventListener('scroll', this.trackScrolling);
     }
 
-    remove_scroll_listener()
-    {
+    remove_scroll_listener() {
         document.removeEventListener('scroll', this.trackScrolling);
     }
 
@@ -73,8 +79,8 @@ class MovieList extends React.Component {
                                 poster={tmdb_images_prefix + movie.poster_path}/>
                         );
                     }) : null}
-
                 </Grid>
+                <S.CircularProgress/>
             </div>
         );
     }
