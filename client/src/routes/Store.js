@@ -27,7 +27,7 @@ class Store {
             top_rated_movies: [],
             page: 1
         });
-        // this.update_movies();
+        this.update_movies();
     }
 }
 

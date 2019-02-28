@@ -9,35 +9,75 @@ import InfiniteScroll from 'react-infinite-scroller';
 
 let S = {};
 
-function MovieList(props) {
-    // console.log(store);
-    const tmdb_images_prefix = "https://image.tmdb.org/t/p/original/";
+class MovieList extends React.Component {
+    constructor(props) {
+        super(props);
+        this.myRef = React.createRef();
+    }
 
-    return (
-        <div {...props}>
-            <InfiniteScroll
-                pageStart={0}
-                loadMore={() => {
-                    // console.log("Load more...");
-                    store.set_page(store.page + 1);
-                }}
-                hasMore={true || false}
-                loader={<div className="loader" key={0}>Loading ...</div>}
-            >
+    isBottom(el) {
+        // return el.getBoundingClientRect().bottom <= window.innerHeight;
+        let this_bottom = this.myRef.current.getBoundingClientRect().bottom;
+        // console.log(this_bottom);
+        // console.log(window.innerHeight);
+        return this_bottom <= window.innerHeight;
+    }
+
+    add_scroll_listener(){
+        document.addEventListener('scroll', this.trackScrolling);
+    }
+
+    remove_scroll_listener()
+    {
+        document.removeEventListener('scroll', this.trackScrolling);
+    }
+
+    componentDidMount() {
+        this.add_scroll_listener();
+    }
+
+    componentWillUnmount() {
+        this.remove_scroll_listener();
+    }
+
+    trackScrolling = () => {
+        const wrappedElement = document.getElementById('header');
+        if (this.isBottom(wrappedElement)) {
+            // console.log('header bottom reached');
+            this.load_more();
+            this.remove_scroll_listener();
+        }
+    };
+
+    load_more() {
+        store.set_page(store.page + 1);
+    }
+
+    render() {
+        this.add_scroll_listener();
+
+        // console.log(store);
+        const tmdb_images_prefix = "https://image.tmdb.org/t/p/original/";
+
+        return (
+            <div {...this.props} ref={this.myRef}>
                 <Grid container
                       spacing={16}
                       justify={"flex-start"}>
+
                     {store.top_rated_movies ? store.top_rated_movies.map(function (movie) {
                         return (
                             <ResponsivePoster
+                                href={"/movie"}
                                 title={movie.title}
                                 poster={tmdb_images_prefix + movie.poster_path}/>
                         );
                     }) : null}
+
                 </Grid>
-            </InfiniteScroll>
-        </div>
-    );
+            </div>
+        );
+    }
 }
 
 S.MovieList = styled(observer(MovieList))`
