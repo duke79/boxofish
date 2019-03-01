@@ -8,6 +8,7 @@ import Typography from "@material-ui/core/Typography";
 
 import Grid from "@material-ui/core/Grid";
 import styled from "styled-components";
+import CardActionArea from "../../node_modules/@material-ui/core/CardActionArea/CardActionArea";
 
 let S = {};
 

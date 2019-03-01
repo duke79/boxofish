@@ -6,6 +6,7 @@ import {ResponsivePoster} from "../components/MovieCard";
 import {observer} from "mobx-react";
 import store from "./Store"
 import CircularProgress from '@material-ui/core/CircularProgress';
+import {Route} from "react-router-dom";
 
 let S = {};
 
@@ -73,10 +74,14 @@ class MovieList extends React.Component {
 
                     {store.top_rated_movies ? store.top_rated_movies.map(function (movie) {
                         return (
-                            <ResponsivePoster
-                                href={"/movie"}
-                                title={movie.title}
-                                poster={tmdb_images_prefix + movie.poster_path}/>
+                            <Route render={({history}) => (
+                                <ResponsivePoster
+                                    onClick={(e) => {
+                                        history.push("/movie/" + movie.id)
+                                    }}
+                                    title={movie.title}
+                                    poster={tmdb_images_prefix + movie.poster_path}/>
+                            )}/>
                         );
                     }) : null}
                 </Grid>

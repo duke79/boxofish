@@ -33,7 +33,7 @@ function MovieTitle(props) {
         <S.Card {...props}>
             <CardContent>
                 <Typography gutterBottom variant="headline" component="h2">
-                    Cat Falling
+                    {"Cat falling " + props.movie_id}
                 </Typography>
             </CardContent>
         </S.Card>
@@ -137,11 +137,11 @@ function PageLayout(props) {
         <div {...props}>
             <Grid container spacing={16} justify={"flex-start"} direction="column">
                 <S.YTPlayer/>
-                <S.MovieTitle />
-                <S.Divider />
-                <S.Stats />
-                <S.Divider />
-                <Overview />
+                <S.MovieTitle movie_id={props.movie_id}/>
+                <S.Divider/>
+                <S.Stats/>
+                <S.Divider/>
+                <Overview/>
             </Grid>
         </div>
     );
@@ -158,9 +158,11 @@ const PageLayoutS = styled(PageLayout)`
 class MoviePage extends React.Component {
     render() {
         // const {classes} = props;
+        // console.log(this.props.match.params.id);
         return (
             <div>
-                <PageLayoutS/>
+                <PageLayoutS movie_id={this.props.match.params.id}
+                             {...this.props}/>
             </div>
         );
     }
