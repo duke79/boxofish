@@ -190,7 +190,7 @@ class Routes extends React.Component {
 }
 
 Routes.defaultProps = {
-}
+};
 
 function select(state) {
     return {}
