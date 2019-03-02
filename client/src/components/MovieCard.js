@@ -13,7 +13,7 @@ import CardActionArea from "../../node_modules/@material-ui/core/CardActionArea/
 let S = {};
 
 S.Card = styled(Card)`
-  height: 335px;
+  height: 270px;
 `;
 
 S.CardMedia = styled(CardMedia)`
@@ -69,7 +69,7 @@ export default MovieCard;
 function Poster(props) {
     return (
         <Grid
-            item xs={6}
+            item xs={4}
             sm={4}
             md={3}
             lg={2}
