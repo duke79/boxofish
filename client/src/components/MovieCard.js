@@ -13,12 +13,12 @@ import CardActionArea from "../../node_modules/@material-ui/core/CardActionArea/
 let S = {};
 
 S.Card = styled(Card)`
-  height: 250px;
+  height: 335px;
 `;
 
 S.CardMedia = styled(CardMedia)`
   height: 0;
-  padding-top: 86.25%;
+  padding-top: 150%;
 `;
 
 function MovieCard(props) {
