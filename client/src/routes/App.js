@@ -1,5 +1,5 @@
 import React from 'react';
-import {BrowserRouter as Router, Redirect, Route, /*Link*/} from "react-router-dom";
+import {HashRouter as Router, Redirect, Route, /*Link*/} from "react-router-dom";
 
 import MovieList from "./MovieList";
 import Menu from "../components/Menu";
