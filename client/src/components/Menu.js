@@ -96,7 +96,7 @@ class ResponsiveDrawer extends React.Component {
                     <List>
                         <ListItem button key={"Top Rated Movies"}
                                   onClick={(e) => {
-                                      history.push("/");
+                                      history.push("/movies/top_rated");
                                       this.setState(state => ({mobileOpen: false}));
                                   }}>
                             <ListItemIcon>
@@ -104,13 +104,21 @@ class ResponsiveDrawer extends React.Component {
                             </ListItemIcon>
                             <ListItemText primary={"Top Rated Movies"}/>
                         </ListItem>
-                        <ListItem button key={"Recent Movies"}>
+                        <ListItem button key={"Recent Movies"}
+                                  onClick={(e) => {
+                                      history.push("/movies/now_playing");
+                                      this.setState(state => ({mobileOpen: false}));
+                                  }}>
                             <ListItemIcon>
                                 <IconAccessTime/>
                             </ListItemIcon>
                             <ListItemText primary={"Recent Movies"}/>
                         </ListItem>
-                        <ListItem button key={"Upcoming Movies"}>
+                        <ListItem button key={"Upcoming Movies"}
+                                  onClick={(e) => {
+                                      history.push("/movies/upcoming");
+                                      this.setState(state => ({mobileOpen: false}));
+                                  }}>
                             <ListItemIcon>
                                 <IconNextWeek/>
                             </ListItemIcon>
@@ -135,7 +143,7 @@ class ResponsiveDrawer extends React.Component {
                             <MenuIcon/>
                         </IconButton>
                         <Typography variant="h6" color="inherit" noWrap>
-                            Top Rated Movies
+                            boxofish
                         </Typography>
                     </Toolbar>
                 </AppBar>

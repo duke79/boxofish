@@ -1,5 +1,5 @@
 import React from 'react';
-import {HashRouter as Router, Route, /*Link*/} from "react-router-dom";
+import {BrowserRouter as Router, Redirect, Route, /*Link*/} from "react-router-dom";
 
 import MovieList from "./MovieList";
 import Menu from "../components/Menu";
@@ -9,8 +9,11 @@ class App extends React.Component {
     render() {
         return <Router>
             <Menu>
-                <Route path="/movie/:id" component={MoviePage}/>
-                <Route exact path="/" component={MovieList}/>
+                <Route exact path="/movies/:collection_name" component={MovieList}/>
+                <Route exact path="/movie/:id" component={MoviePage}/>
+                <Route exact path="/" render={() => (
+                    <Redirect to="/movies/now_playing"/>
+                )}/>
             </Menu>
         </Router>
     }

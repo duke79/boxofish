@@ -13,15 +13,22 @@ class Store {
     @observable genres = [];
 
     constructor() {
-        this.page = 1;
+        this.page = {};
 
-        let collection_name = "top_rated";
-        this.append_movies(collection_name);
+        // let collection_name = "top_rated";
+        // this.append_movies(collection_name);
         this.update_genres();
     }
 
+    load_more = action("load_more", function (collection_name) {
+        if(typeof(store.page[collection_name]) === "undefined")
+            store.page[collection_name] = 0;
+        store.load_page(store.page[collection_name] + 1, collection_name);
+    });
+
     load_page = action("load_page", function (val, collection_name = "top_rated") {
-        this.page = val;
+        console.log("Loading... " + collection_name);
+        this.page[collection_name] = val;
         this.append_movies(collection_name);
     });
 
@@ -78,18 +85,19 @@ class Store {
         axios
             .get(
                 `${tmdb_api_home}/movie/${collection_name}?api_key=${tmdb_api_key}&page=${
-                    this.page
+                    this.page[collection_name]
                     }`
             )
             .then(res => {
                 // console.log(res);
                 Array.prototype.push.apply(this.movies,
                     res.data.results.map((movie) => {
-                        if (typeof (movie["list_name"]) === "undefined")
-                            movie["list_name"] = [];
-                        movie["list_name"].push(collection_name);
+                        if (typeof (movie["collection_name"]) === "undefined")
+                            movie["collection_name"] = [];
+                        movie["collection_name"].push(collection_name);
                         return movie;
                     }));
+                console.log(this.movies);
             });
     }
 

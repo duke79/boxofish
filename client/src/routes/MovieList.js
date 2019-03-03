@@ -21,6 +21,15 @@ class MovieList extends React.Component {
     constructor(props) {
         super(props);
         this.myRef = React.createRef();
+        this.load_more(this.props)
+    }
+
+    componentWillReceiveProps(props) {
+        this.load_more(props);
+    }
+
+    load_more(props) {
+        store.load_more(props.match.params.collection_name);
     }
 
     isBottom(el) {
@@ -51,14 +60,10 @@ class MovieList extends React.Component {
         const wrappedElement = document.getElementById('header');
         if (this.isBottom(wrappedElement)) {
             // console.log('header bottom reached');
-            this.load_more();
+            store.load_more(this.props.match.params.collection_name);
             this.remove_scroll_listener();
         }
     };
-
-    load_more() {
-        store.load_page(store.page + 1);
-    }
 
     render() {
         this.add_scroll_listener();
@@ -73,6 +78,7 @@ class MovieList extends React.Component {
                       justify={"flex-start"}>
 
                     {store.movies ? store.movies.map(function (movie) {
+                        if (!movie.collection_name.includes(this.props.match.params.collection_name)) return;
                         return (
                             <Route render={({history}) => (
                                 <ResponsivePoster
@@ -83,7 +89,7 @@ class MovieList extends React.Component {
                                     poster={tmdb_images_prefix + movie.poster_path}/>
                             )}/>
                         );
-                    }) : null}
+                    }.bind(this)) : null}
                 </Grid>
                 <S.CircularProgress/>
             </div>
