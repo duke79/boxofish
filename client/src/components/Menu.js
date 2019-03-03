@@ -6,16 +6,21 @@ import Divider from "@material-ui/core/Divider";
 import Drawer from "@material-ui/core/Drawer";
 import Hidden from "@material-ui/core/Hidden";
 import IconButton from "@material-ui/core/IconButton";
-import InboxIcon from "@material-ui/icons/MoveToInbox";
+import IconStarRate from "@material-ui/icons/StarRate";
+import IconAccessTime from "@material-ui/icons/AccessTime";
+import IconNextWeek from "@material-ui/icons/NextWeek";
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
-import MailIcon from "@material-ui/icons/Mail";
 import MenuIcon from "@material-ui/icons/Menu";
 import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
 import {withStyles} from "@material-ui/core/styles";
+import styled from "styled-components"
+import {Route} from "react-router-dom";
+
+let S = {};
 
 const drawerWidth = 240;
 
@@ -51,6 +56,26 @@ const styles = theme => ({
     }
 });
 
+class Headline extends React.Component {
+    render() {
+        return (
+            <Typography
+                variant={"headline"}
+                align={"center"}
+                {...this.props}>
+                boxofish
+            </Typography>
+        );
+    }
+}
+
+S.Headline = styled(Headline)`
+  &&{
+    margin-top: 27px;
+    margin-bottom: 32px;
+  }
+`;
+
 class ResponsiveDrawer extends React.Component {
     state = {
         mobileOpen: false
@@ -65,33 +90,34 @@ class ResponsiveDrawer extends React.Component {
 
         const drawer = (
             <div>
-                <Typography
-                    variant={"headline"}
-                    align={"center"}>
-                    Box o' fish
-                </Typography>
+                <S.Headline/>
                 <Divider/>
-                <List>
-                    {["Inbox", "Starred", "Send email", "Drafts"].map((text, index) => (
-                        <ListItem button key={text}>
+                <Route render={({history}) => (
+                    <List>
+                        <ListItem button key={"Top Rated Movies"}
+                                  onClick={(e) => {
+                                      history.push("/");
+                                      this.setState(state => ({mobileOpen: false}));
+                                  }}>
                             <ListItemIcon>
-                                {index % 2 === 0 ? <InboxIcon/> : <MailIcon/>}
+                                <IconStarRate/>
                             </ListItemIcon>
-                            <ListItemText primary={text}/>
+                            <ListItemText primary={"Top Rated Movies"}/>
                         </ListItem>
-                    ))}
-                </List>
-                <Divider/>
-                <List>
-                    {["All mail", "Trash", "Spam"].map((text, index) => (
-                        <ListItem button key={text}>
+                        <ListItem button key={"Recent Movies"}>
                             <ListItemIcon>
-                                {index % 2 === 0 ? <InboxIcon/> : <MailIcon/>}
+                                <IconAccessTime/>
                             </ListItemIcon>
-                            <ListItemText primary={text}/>
+                            <ListItemText primary={"Recent Movies"}/>
                         </ListItem>
-                    ))}
-                </List>
+                        <ListItem button key={"Upcoming Movies"}>
+                            <ListItemIcon>
+                                <IconNextWeek/>
+                            </ListItemIcon>
+                            <ListItemText primary={"Upcoming Movies"}/>
+                        </ListItem>
+                    </List>
+                )}/>
             </div>
         );
 
