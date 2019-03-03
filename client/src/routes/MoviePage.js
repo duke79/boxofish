@@ -71,9 +71,6 @@ function Overview(props) {
     return (
         <S.Card {...props}>
             <CardContent>
-                <Typography gutterBottom variant="headline" component="h2">
-                    Overview
-                </Typography>
                 <Typography gutterBottom variant="p">
                     {props.overview ?
                         props.overview :
@@ -86,9 +83,11 @@ function Overview(props) {
 
 function Ratings(props) {
     return (
+        <div>
         <Typography gutterBottom variant="h5" {...props}>
             {props.vote_average ? props.vote_average : 0}
         </Typography>
+        </div>
     );
 }
 
@@ -175,6 +174,7 @@ S.PageLayout = styled(PageLayout)`
     //margin: 0px;
     //overflow-x: hidden;
     padding: 8px; //https://material-ui.com/layout/grid/#limitations;
+    margin: 8px;
   }
 `;
 
