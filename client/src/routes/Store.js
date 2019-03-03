@@ -8,13 +8,26 @@ class Store {
         });
         this.page = 1;
 
-        let collection_name="top_rated";
+        let collection_name = "top_rated";
         this.append_movies(collection_name);
     }
 
-    load_page = action("load_page", function (val, collection_name="top_rated") {
+    load_page = action("load_page", function (val, collection_name = "top_rated") {
         this.page = val;
         this.append_movies(collection_name);
+    });
+
+    get_movie = action("get_movie", function (id) {
+        let movie = null;
+        for (let i = 0; i < this.movies.length; i++) {
+            // console.log(id);
+            if (this.movies[i].id.toString() === id) {
+                movie = this.movies[i];
+                break;
+            }
+        }
+        console.log(movie);
+        return movie ? movie : {title: "not found!"};
     });
 
     append_movies(collection_name) {

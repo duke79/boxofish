@@ -7,7 +7,7 @@ import CardContent from "@material-ui/core/CardContent";
 import Typography from "@material-ui/core/Typography";
 import YTPlayer from "../components/YTPlayer";
 import Divider from "@material-ui/core/Divider";
-import {unstable_Box as Box} from "@material-ui/core/Box";
+import store from "./Store"
 
 let S = {};
 
@@ -33,7 +33,7 @@ function MovieTitle(props) {
         <S.Card {...props}>
             <CardContent>
                 <Typography gutterBottom variant="headline" component="h2">
-                    {"Cat falling " + props.movie_id}
+                    {props.title}
                 </Typography>
             </CardContent>
         </S.Card>
@@ -71,8 +71,9 @@ function Overview(props) {
                     Overview
                 </Typography>
                 <Typography gutterBottom variant="p">
-                    This movie centers around teen hero Kim Possible and friends as they
-                    try to balance high school with saving the world everyday.
+                    {props.overview ?
+                        props.overview :
+                        "Not found!"}
                 </Typography>
             </CardContent>
         </S.Card>
@@ -82,7 +83,7 @@ function Overview(props) {
 function Ratings(props) {
     return (
         <Typography gutterBottom variant="h5" noWrap {...props}>
-            7.4
+            {props.vote_average ? props.vote_average : 0}
         </Typography>
     );
 }
@@ -115,7 +116,7 @@ function Stats(props) {
     return (
         <S.Card {...props}>
             <CardContent>
-                <S.Ratings/>
+                <S.Ratings vote_average={props.vote_average}/>
                 <S.Genres/>
             </CardContent>
         </S.Card>
@@ -137,11 +138,11 @@ function PageLayout(props) {
         <div {...props}>
             <Grid container spacing={16} justify={"flex-start"} direction="column">
                 <S.YTPlayer/>
-                <S.MovieTitle movie_id={props.movie_id}/>
+                <S.MovieTitle title={props.movie.title}/>
                 <S.Divider/>
-                <S.Stats/>
+                <S.Stats vote_average={props.movie.vote_average} genre_ids={props.movie.genre_ids}/>
                 <S.Divider/>
-                <Overview/>
+                <Overview overview={props.movie.overview}/>
             </Grid>
         </div>
     );
@@ -157,12 +158,10 @@ const PageLayoutS = styled(PageLayout)`
 
 class MoviePage extends React.Component {
     render() {
-        // const {classes} = props;
-        // console.log(this.props.match.params.id);
+        let movie = store.get_movie(this.props.match.params.id);
         return (
             <div>
-                <PageLayoutS movie_id={this.props.match.params.id}
-                             {...this.props}/>
+                <PageLayoutS movie={movie} {...this.props}/>
             </div>
         );
     }
