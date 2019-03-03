@@ -8,6 +8,7 @@ import Typography from "@material-ui/core/Typography";
 import YTPlayer from "../components/YTPlayer";
 import Divider from "@material-ui/core/Divider";
 import store from "./Store"
+import {observer} from "mobx-react";
 
 let S = {};
 
@@ -28,16 +29,19 @@ const TitleBlockS = styled(TitleBlock)`
 
 S.Card = styled(Card)``;
 
-function MovieTitle(props) {
-    return (
-        <S.Card {...props}>
-            <CardContent>
-                <Typography gutterBottom variant="headline" component="h2">
-                    {props.title}
-                </Typography>
-            </CardContent>
-        </S.Card>
-    );
+@observer
+class MovieTitle extends React.Component {
+    render() {
+        return (
+            <S.Card {...this.props}>
+                <CardContent>
+                    <Typography gutterBottom variant="headline" component="h2">
+                        {this.props.title}
+                    </Typography>
+                </CardContent>
+            </S.Card>
+        );
+    }
 }
 
 S.MovieTitle = styled(MovieTitle)`
@@ -112,15 +116,18 @@ S.Genres = styled(Genres)`
   font-family: Monospace;
 `;
 
-function Stats(props) {
-    return (
-        <S.Card {...props}>
-            <CardContent>
-                <S.Ratings vote_average={props.vote_average}/>
-                <S.Genres/>
-            </CardContent>
-        </S.Card>
-    );
+@observer
+class Stats extends React.Component {
+    render() {
+        return (
+            <S.Card {...this.props}>
+                <CardContent>
+                    <S.Ratings vote_average={this.props.vote_average}/>
+                    <S.Genres/>
+                </CardContent>
+            </S.Card>
+        );
+    }
 }
 
 S.Stats = styled(Stats)`
@@ -133,22 +140,29 @@ S.Stats = styled(Stats)`
   }
 `;
 
-function PageLayout(props) {
-    return (
-        <div {...props}>
-            <Grid container spacing={16} justify={"flex-start"} direction="column">
-                <S.YTPlayer/>
-                <S.MovieTitle title={props.movie.title}/>
-                <S.Divider/>
-                <S.Stats vote_average={props.movie.vote_average} genre_ids={props.movie.genre_ids}/>
-                <S.Divider/>
-                <Overview overview={props.movie.overview}/>
-            </Grid>
-        </div>
-    );
+@observer
+class PageLayout extends React.Component {
+    render() {
+        return (
+            <div {...this.props}>
+                <Grid container spacing={16} justify={"flex-start"} direction="column">
+                    <S.YTPlayer
+                        videoId={(this.props.movie.videos &&
+                            this.props.movie.videos[0] &&
+                            this.props.movie.videos[0].key) ?
+                            this.props.movie.videos[0].key : null}/>
+                    <S.MovieTitle title={this.props.movie.title}/>
+                    <S.Divider/>
+                    <S.Stats vote_average={this.props.movie.vote_average} genre_ids={this.props.movie.genre_ids}/>
+                    <S.Divider/>
+                    <Overview overview={this.props.movie.overview}/>
+                </Grid>
+            </div>
+        );
+    }
 }
 
-const PageLayoutS = styled(PageLayout)`
+S.PageLayout = styled(PageLayout)`
   && {
     //margin: 0px;
     //overflow-x: hidden;
@@ -156,12 +170,19 @@ const PageLayoutS = styled(PageLayout)`
   }
 `;
 
+@observer
 class MoviePage extends React.Component {
-    render() {
+    constructor(props) {
+        super(props);
         let movie = store.get_movie(this.props.match.params.id);
+    }
+
+    render() {
+        console.log("rendering!");
+        // console.log(store.movie.videos);
         return (
             <div>
-                <PageLayoutS movie={movie} {...this.props}/>
+                <S.PageLayout movie={store.movie} {...this.props}/>
             </div>
         );
     }
@@ -172,4 +193,5 @@ MoviePage.propTypes = {
 };
 
 MoviePage.defaultProps = {};
+// MoviePage = observer(MoviePage);
 export default MoviePage;
