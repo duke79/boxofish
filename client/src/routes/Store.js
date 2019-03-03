@@ -10,12 +10,14 @@ class Store {
         title: null,
         videos: []
     };
+    @observable genres = [];
 
     constructor() {
         this.page = 1;
 
         let collection_name = "top_rated";
         this.append_movies(collection_name);
+        this.update_genres();
     }
 
     load_page = action("load_page", function (val, collection_name = "top_rated") {
@@ -33,19 +35,43 @@ class Store {
             }
         }
         console.log(this.movie);
-        this.update_movie(id);
+        this.update_movie_videos();
+        this.populate_movie_genres();
         return this.movie;
     });
 
-    update_movie(id) {
+    update_movie_videos(id) {
         axios
             .get(
-                `${tmdb_api_home}/movie/${id}/videos?api_key=${tmdb_api_key}`
+                `${tmdb_api_home}/movie/${this.movie.id}/videos?api_key=${tmdb_api_key}`
             )
             .then(res => {
                 // console.log(res);
                 this.movie.videos = res.data.results;
             });
+    }
+
+    populate_movie_genres() {
+        if (!this.movie.genre_ids) return;
+        if (!this.genres) return;
+
+        console.log(this.movie.genre_ids);
+        console.log(this.genres);
+
+        this.movie.genres = [];
+        for (let i = 0; i < this.movie.genre_ids.length; i++) {
+            for (let j = 0; j < this.genres.length; j++) {
+                if (this.movie.genre_ids[i].toString() === this.genres[j].id.toString())
+                    this.movie.genres.push(this.genres[j]);
+                else {
+                    console.log(this.movie.genre_ids[i] +
+                        " & " +
+                        this.genres[j].id +
+                        " are not equal! "
+                    )
+                }
+            }
+        }
     }
 
     append_movies(collection_name) {
@@ -64,6 +90,21 @@ class Store {
                         movie["list_name"].push(collection_name);
                         return movie;
                     }));
+            });
+    }
+
+    update_genres() {
+        axios
+            .get(
+                `${tmdb_api_home}/genre/movie/list?api_key=${tmdb_api_key}`
+            )
+            .then(res => {
+                console.log(res.data);
+                Array.prototype.push.apply(this.genres,
+                    res.data.genres ? res.data.genres.map((genre) => {
+                        return genre;
+                    }) : null);
+                console.log(this.genres);
             });
     }
 }

@@ -86,7 +86,7 @@ function Overview(props) {
 
 function Ratings(props) {
     return (
-        <Typography gutterBottom variant="h5" noWrap {...props}>
+        <Typography gutterBottom variant="h5" {...props}>
             {props.vote_average ? props.vote_average : 0}
         </Typography>
     );
@@ -94,7 +94,7 @@ function Ratings(props) {
 
 S.Ratings = styled(Ratings)`
   && {
-    align-self: flex-end;
+    align-self: center;
     font-family: Srisakdi;
     // border-bottom: #0000002b solid 1px;
     color: blue;
@@ -102,17 +102,25 @@ S.Ratings = styled(Ratings)`
 `;
 
 function Genres(props) {
+    console.log(props);
+    let genres = props.genres ? props.genres.map(function (genre, idx) {
+        let post_fix = idx < props.genres.length - 1 ? ", " : "";
+        // console.log("To append: " + post_fix);
+        return genre.name + post_fix;
+    }) : null;
+    console.log(genres);
+
     return (
-        <Typography gutterBottom variant="p" noWrap {...props}>
-            Action, Thriller, Science Fiction
+        <Typography gutterBottom variant="p" {...props}>
+            {genres}
         </Typography>
     );
 }
 
 S.Genres = styled(Genres)`
   padding-left: 30px;
-  align-self: flex-end;
-  padding-bottom: 10px;
+  align-self: center;
+  //padding-bottom: 10px;
   font-family: Monospace;
 `;
 
@@ -123,7 +131,7 @@ class Stats extends React.Component {
             <S.Card {...this.props}>
                 <CardContent>
                     <S.Ratings vote_average={this.props.vote_average}/>
-                    <S.Genres/>
+                    <S.Genres genres={this.props.genres}/>
                 </CardContent>
             </S.Card>
         );
@@ -153,7 +161,7 @@ class PageLayout extends React.Component {
                             this.props.movie.videos[0].key : null}/>
                     <S.MovieTitle title={this.props.movie.title}/>
                     <S.Divider/>
-                    <S.Stats vote_average={this.props.movie.vote_average} genre_ids={this.props.movie.genre_ids}/>
+                    <S.Stats vote_average={this.props.movie.vote_average} genres={this.props.movie.genres}/>
                     <S.Divider/>
                     <Overview overview={this.props.movie.overview}/>
                 </Grid>
