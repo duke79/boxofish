@@ -2,32 +2,40 @@ import {extendObservable, observable, action} from "mobx";
 import axios from "axios";
 
 class Store {
-    update_movies() {
+    constructor() {
+        extendObservable(this, {
+            movies: [],
+        });
+        this.page = 1;
+
+        let collection_name="top_rated";
+        this.append_movies(collection_name);
+    }
+
+    load_page = action("load_page", function (val, collection_name="top_rated") {
+        this.page = val;
+        this.append_movies(collection_name);
+    });
+
+    append_movies(collection_name) {
         let tmdb_api_home = "https://api.themoviedb.org/3";
         let tmdb_api_key = "e30bdefcb66c118c558f0793cf22e8e2";
         axios
             .get(
-                `${tmdb_api_home}/movie/top_rated?api_key=${tmdb_api_key}&page=${
+                `${tmdb_api_home}/movie/${collection_name}?api_key=${tmdb_api_key}&page=${
                     this.page
                     }`
             )
             .then(res => {
-                console.log(res);
-                Array.prototype.push.apply(this.top_rated_movies, res.data.results);
+                // console.log(res);
+                Array.prototype.push.apply(this.movies,
+                    res.data.results.map((movie) => {
+                        if (typeof (movie["list_name"]) === "undefined")
+                            movie["list_name"] = [];
+                        movie["list_name"].push(collection_name);
+                        return movie;
+                    }));
             });
-    }
-
-    set_page = action("set_page", function (val) {
-        this.page = val;
-        this.update_movies();
-    });
-
-    constructor() {
-        extendObservable(this, {
-            top_rated_movies: [],
-            page: 1
-        });
-        this.update_movies();
     }
 }
 

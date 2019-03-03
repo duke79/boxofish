@@ -57,7 +57,7 @@ class MovieList extends React.Component {
     };
 
     load_more() {
-        store.set_page(store.page + 1);
+        store.load_page(store.page + 1);
     }
 
     render() {
@@ -72,7 +72,7 @@ class MovieList extends React.Component {
                       spacing={16}
                       justify={"flex-start"}>
 
-                    {store.top_rated_movies ? store.top_rated_movies.map(function (movie) {
+                    {store.movies ? store.movies.map(function (movie) {
                         return (
                             <Route render={({history}) => (
                                 <ResponsivePoster
