@@ -70,6 +70,7 @@ class MovieList extends React.Component {
 
         // console.log(store);
         const tmdb_images_prefix = "https://image.tmdb.org/t/p/original/";
+        const tmdb_small_images_prefix = "https://image.tmdb.org/t/p/w200/";
 
         return (
             <div {...this.props} ref={this.myRef}>
@@ -86,7 +87,7 @@ class MovieList extends React.Component {
                                         history.push("/movie/" + movie.id)
                                     }}
                                     title={movie.title}
-                                    poster={tmdb_images_prefix + movie.poster_path}/>
+                                    poster={tmdb_small_images_prefix + movie.poster_path}/>
                             )}/>
                         );
                     }.bind(this)) : null}
