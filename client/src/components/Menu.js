@@ -19,6 +19,7 @@ import Typography from "@material-ui/core/Typography";
 import {withStyles} from "@material-ui/core/styles";
 import styled from "styled-components"
 import {Route} from "react-router-dom";
+import SearchIcon from '@material-ui/icons/Search';
 
 let S = {};
 
@@ -74,6 +75,11 @@ S.Headline = styled(Headline)`
     margin-top: 27px;
     margin-bottom: 32px;
   }
+`;
+
+S.SearchIcon = styled(SearchIcon)`
+  margin-left: auto;
+  margin-right: 12px;
 `;
 
 class ResponsiveDrawer extends React.Component {
@@ -145,6 +151,7 @@ class ResponsiveDrawer extends React.Component {
                         <Typography variant="h6" color="inherit" noWrap>
                             boxofish
                         </Typography>
+                        <S.SearchIcon/>
                     </Toolbar>
                 </AppBar>
                 <nav className={classes.drawer}>
