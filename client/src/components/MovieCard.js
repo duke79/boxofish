@@ -13,12 +13,20 @@ import CardActionArea from "../../node_modules/@material-ui/core/CardActionArea/
 let S = {};
 
 S.Card = styled(Card)`
-  height: 335px;
+  //height: 312px;
 `;
 
 S.CardMedia = styled(CardMedia)`
   height: 0;
   padding-top: 150%;
+`;
+
+S.CardContent = styled(CardContent)`
+    && {
+      margin-top: -58px;    
+      background-color: white;
+      padding-bottom: 16px;
+    }
 `;
 
 function MovieCard(props) {
@@ -30,26 +38,26 @@ function MovieCard(props) {
                     //image="https://material-ui.com/static/images/cards/contemplative-reptile.jpg"
                     title={props.title ? props.title : null}
                 />
-                <CardContent>
+                <S.CardContent>
                     <Typography gutterBottom component="p">
                         {props.title ? props.title : null}
                     </Typography>
                     <Typography component="p">
                         {props.detail ? props.detail : null}
                     </Typography>
-                </CardContent>
+                </S.CardContent>
 
-                <CardActions>
-                    {props.buttons
-                        ? props.buttons.map(function (btn) {
-                            return (
-                                <Button size="small" color="primary">
-                                    {btn}
-                                </Button>
-                            );
-                        })
-                        : null}
-                </CardActions>
+                {/*<CardActions>*/}
+                {/*{props.buttons*/}
+                {/*? props.buttons.map(function (btn) {*/}
+                {/*return (*/}
+                {/*<Button size="small" color="primary">*/}
+                {/*{btn}*/}
+                {/*</Button>*/}
+                {/*);*/}
+                {/*})*/}
+                {/*: null}*/}
+                {/*</CardActions>*/}
             </S.Card>
         </div>
     );

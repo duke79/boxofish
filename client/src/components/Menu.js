@@ -80,6 +80,7 @@ S.Headline = styled(Headline)`
 S.SearchIcon = styled(SearchIcon)`
   margin-left: auto;
   margin-right: 12px;
+  cursor: pointer;
 `;
 
 class ResponsiveDrawer extends React.Component {
@@ -136,57 +137,62 @@ class ResponsiveDrawer extends React.Component {
         );
 
         return (
-            <div className={classes.root}>
-                <CssBaseline/>
-                <AppBar position="fixed" className={classes.appBar}>
-                    <Toolbar>
-                        <IconButton
-                            color="inherit"
-                            aria-label="Open drawer"
-                            onClick={this.handleDrawerToggle}
-                            className={classes.menuButton}
-                        >
-                            <MenuIcon/>
-                        </IconButton>
-                        <Typography variant="h6" color="inherit" noWrap>
-                            boxofish
-                        </Typography>
-                        <S.SearchIcon/>
-                    </Toolbar>
-                </AppBar>
-                <nav className={classes.drawer}>
-                    {/* The implementation can be swapped with js to avoid SEO duplication of links. */}
-                    <Hidden smUp implementation="css">
-                        <Drawer
-                            container={this.props.container}
-                            variant="temporary"
-                            anchor={theme.direction === "rtl" ? "right" : "left"}
-                            open={this.state.mobileOpen}
-                            onClose={this.handleDrawerToggle}
-                            classes={{
-                                paper: classes.drawerPaper
-                            }}
-                        >
-                            {drawer}
-                        </Drawer>
-                    </Hidden>
-                    <Hidden xsDown implementation="css">
-                        <Drawer
-                            classes={{
-                                paper: classes.drawerPaper
-                            }}
-                            variant="permanent"
-                            open
-                        >
-                            {drawer}
-                        </Drawer>
-                    </Hidden>
-                </nav>
-                <main className={classes.content}>
-                    <div className={classes.toolbar}/>
-                    {this.props.children}
-                </main>
-            </div>
+            <Route render={({history}) => (
+                <div className={classes.root}>
+                    <CssBaseline/>
+                    <AppBar position="fixed" className={classes.appBar}>
+                        <Toolbar>
+                            <IconButton
+                                color="inherit"
+                                aria-label="Open drawer"
+                                onClick={this.handleDrawerToggle}
+                                className={classes.menuButton}
+                            >
+                                <MenuIcon/>
+                            </IconButton>
+                            <Typography variant="h6" color="inherit" noWrap>
+                                boxofish
+                            </Typography>
+                            <S.SearchIcon
+                                onClick={(e) => {
+                                    history.push("/search");
+                                }}/>
+                        </Toolbar>
+                    </AppBar>
+                    <nav className={classes.drawer}>
+                        {/* The implementation can be swapped with js to avoid SEO duplication of links. */}
+                        <Hidden smUp implementation="css">
+                            <Drawer
+                                container={this.props.container}
+                                variant="temporary"
+                                anchor={theme.direction === "rtl" ? "right" : "left"}
+                                open={this.state.mobileOpen}
+                                onClose={this.handleDrawerToggle}
+                                classes={{
+                                    paper: classes.drawerPaper
+                                }}
+                            >
+                                {drawer}
+                            </Drawer>
+                        </Hidden>
+                        <Hidden xsDown implementation="css">
+                            <Drawer
+                                classes={{
+                                    paper: classes.drawerPaper
+                                }}
+                                variant="permanent"
+                                open
+                            >
+                                {drawer}
+                            </Drawer>
+                        </Hidden>
+                    </nav>
+                    <main className={classes.content}>
+                        <div className={classes.toolbar}/>
+                        {this.props.children}
+                    </main>
+                </div>
+            )}/>
         );
     }
 }
