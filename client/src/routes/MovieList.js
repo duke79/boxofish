@@ -7,6 +7,7 @@ import {observer} from "mobx-react";
 import store from "./Store"
 import CircularProgress from '@material-ui/core/CircularProgress';
 import {Route} from "react-router-dom";
+import Menu from "../components/Menu";
 
 let S = {};
 
@@ -86,27 +87,29 @@ class MovieList extends React.Component {
         const tmdb_small_images_prefix = "https://image.tmdb.org/t/p/w200/";
 
         return (
-            <div {...this.props} ref={this.myRef}>
-                <Grid container
-                      spacing={16}
-                      justify={"flex-start"}>
+            <Menu>
+                <div {...this.props} ref={this.myRef}>
+                    <Grid container
+                          spacing={16}
+                          justify={"flex-start"}>
 
-                    {store.movies ? store.movies.map(function (movie) {
-                        if (!movie.collection_name.includes(this.props.match.params.collection_name)) return;
-                        return (
-                            <Route render={({history}) => (
-                                <ResponsivePoster
-                                    onClick={(e) => {
-                                        history.push("/movie/" + movie.id)
-                                    }}
-                                    title={movie.title}
-                                    poster={tmdb_small_images_prefix + movie.poster_path}/>
-                            )}/>
-                        );
-                    }.bind(this)) : null}
-                </Grid>
-                <S.CircularProgress/>
-            </div>
+                        {store.movies ? store.movies.map(function (movie) {
+                            if (!movie.collection_name.includes(this.props.match.params.collection_name)) return;
+                            return (
+                                <Route render={({history}) => (
+                                    <ResponsivePoster
+                                        onClick={(e) => {
+                                            history.push("/movie/" + movie.id)
+                                        }}
+                                        title={movie.title}
+                                        poster={tmdb_small_images_prefix + movie.poster_path}/>
+                                )}/>
+                            );
+                        }.bind(this)) : null}
+                    </Grid>
+                    <S.CircularProgress/>
+                </div>
+            </Menu>
         );
     }
 }

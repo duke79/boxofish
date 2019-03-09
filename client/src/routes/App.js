@@ -9,14 +9,14 @@ import Search from "./Search";
 class App extends React.Component {
     render() {
         return <Router>
-            <Menu>
+            <div>
                 <Route exact path="/" render={() => (
                     <Redirect to="/movies/now_playing"/>
                 )}/>
                 <Route exact path="/movies/:collection_name" component={MovieList}/>
                 <Route exact path="/movie/:id" component={MoviePage}/>
                 <Route exact path="/search" component={Search}/>
-            </Menu>
+            </div>
         </Router>
     }
 }
