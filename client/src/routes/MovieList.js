@@ -21,11 +21,24 @@ class MovieList extends React.Component {
     constructor(props) {
         super(props);
         this.myRef = React.createRef();
-        this.load_more(this.props)
+
+        if (this.to_load_more) this.load_more(this.props);
     }
 
     componentWillReceiveProps(props) {
-        this.load_more(props);
+        if (this.to_load_more) this.load_more(props);
+    }
+
+    get to_load_more() {
+        let to_load_more = true;
+        if (store.movies) {
+            store.movies.forEach(movie => {
+                if (movie.collection_name.includes(this.props.match.params.collection_name)) {
+                    to_load_more = false;
+                }
+            })
+        }
+        return to_load_more;
     }
 
     load_more(props) {
