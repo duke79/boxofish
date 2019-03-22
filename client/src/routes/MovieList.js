@@ -4,7 +4,7 @@ import Grid from "@material-ui/core/Grid";
 import {ResponsivePoster} from "../components/MovieCard";
 
 import {observer} from "mobx-react";
-import store from "./Store"
+import store, {tmdb_small_images_prefix} from "./Store"
 import {Route} from "react-router-dom";
 import Menu from "../components/Menu";
 import InfiniteScroll from "../components/InfiniteScroll";
@@ -36,8 +36,6 @@ class MovieList extends React.Component {
 
     render() {
         // console.log(store);
-        const tmdb_images_prefix = "https://image.tmdb.org/t/p/original/";
-        const tmdb_small_images_prefix = "https://image.tmdb.org/t/p/w200/";
 
         return (
             <Menu>

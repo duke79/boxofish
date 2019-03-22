@@ -1,8 +1,10 @@
 import {extendObservable, observable, action} from "mobx";
 import axios from "axios";
 
-let tmdb_api_home = "https://api.themoviedb.org/3";
-let tmdb_api_key = "e30bdefcb66c118c558f0793cf22e8e2";
+export const tmdb_api_home = "https://api.themoviedb.org/3";
+export const tmdb_api_key = "e30bdefcb66c118c558f0793cf22e8e2";
+export const tmdb_images_prefix = "https://image.tmdb.org/t/p/original/";
+export const tmdb_small_images_prefix = "https://image.tmdb.org/t/p/w200/";
 
 class Store {
     @observable movies = [];
