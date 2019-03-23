@@ -15,7 +15,8 @@ class App extends React.Component {
                 )}/>
                 <Route exact path="/movies/:collection_name" component={MovieList}/>
                 <Route exact path="/movie/:id" component={MoviePage}/>
-                <Route exact path="/search" component={Search}/>
+                <Route exact path="/search/:query" component={Search}/>
+                <Route exact path="/search/" component={Search}/>
             </div>
         </Router>
     }

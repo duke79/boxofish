@@ -11,13 +11,15 @@ class SearchStore {
     }
 
     are_more_pages(query) {
-        if(!query.length || query.length < 1) return false;
+        if(typeof(query) === "undefined" || !query.length || query.length < 1) return false;
         // console.log(this.total_pages);
         // console.log(store.page[query]);
         return this.total_pages > store.page[query];
     }
 
     load_more = action("load_more", function (query) {
+        if(typeof(query) === "undefined" || !query.length || query.length < 1) return;
+
         if (typeof(store.page[query]) === "undefined")
             store.page[query] = 0;
         store.load_page(store.page[query] + 1, query);

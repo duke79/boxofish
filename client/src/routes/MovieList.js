@@ -73,7 +73,7 @@ S.MovieList = styled(observer(MovieList))`
         //margin: 0px;
         //overflow-x: hidden;
         padding: 8px; //https://material-ui.com/layout/grid/#limitations
-        background-color: #d7dee5;
+        background-color: white;
     }
     `;
 

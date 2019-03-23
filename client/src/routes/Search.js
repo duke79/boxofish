@@ -58,7 +58,7 @@ class Search extends React.Component {
         super(props);
 
         this.state = {
-            query: ""
+            query: this.props.match.params.query
         };
 
         this.load_more = this.load_more.bind(this);
@@ -91,7 +91,7 @@ class Search extends React.Component {
     }
 
     render() {
-        // console.log("dendering!");
+        console.log(this.state.query);
         return (
             <Route render={({history}) => (
                 <Observer>
@@ -107,10 +107,12 @@ class Search extends React.Component {
                                         if (this.state.query !== value) {
                                             this.state.query = value;
                                             // console.log("Searching..." + this.state.query);
-                                            this.load_more(this.state.query);
+                                            // this.load_more(this.state.query);
+                                            history.replace(`/search/${this.state.query}`)
                                         }
                                     }}
-                                    placeholder={"Search..."}/>
+                                    placeholder={"Search..."}
+                                    defaultValue={this.state.query}/>
                             </S.Bar>
                             <S.Result>
                                 <InfiniteScroll
