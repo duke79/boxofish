@@ -9,6 +9,7 @@ import YTPlayer from "../components/YTPlayer";
 import Divider from "@material-ui/core/Divider";
 import store from "./Store"
 import {observer} from "mobx-react";
+import CircularProgress from "@material-ui/core/CircularProgress";
 
 let S = {};
 
@@ -178,6 +179,13 @@ S.PageLayout = styled(PageLayout)`
   }
 `;
 
+S.CircularProgress = styled(CircularProgress)`
+  &&{
+    margin: 20px auto auto;
+    display: block;
+  }
+`;
+
 @observer
 class MoviePage extends React.Component {
     constructor(props) {
@@ -189,11 +197,14 @@ class MoviePage extends React.Component {
     render() {
         console.log("rendering!");
         console.log(store.movie);
-        return (
-            <div>
-                <S.PageLayout movie={store.movie} {...this.props}/>
-            </div>
-        );
+        if (store.movie.id && store.movie.id.toString() === this.props.match.params.id.toString())
+            return (
+                <div>
+                    <S.PageLayout movie={store.movie} {...this.props}/>
+                </div>
+            );
+        else
+            return <S.CircularProgress/>;
     }
 }
 

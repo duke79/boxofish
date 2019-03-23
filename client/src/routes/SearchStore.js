@@ -7,6 +7,14 @@ class SearchStore {
 
     constructor() {
         this.page = {};
+        this.total_pages = 0;
+    }
+
+    are_more_pages(query) {
+        if(!query.length || query.length < 1) return false;
+        // console.log(this.total_pages);
+        // console.log(store.page[query]);
+        return this.total_pages > store.page[query];
     }
 
     load_more = action("load_more", function (query) {
@@ -16,7 +24,7 @@ class SearchStore {
     });
 
     load_page = action("load_page", function (val, query = "alita") {
-        if(query.length > 0) {
+        if (query.length > 0) {
             console.log("Loading... " + query);
             this.page[query] = val;
             this.append_movies(query);
@@ -32,6 +40,7 @@ class SearchStore {
             )
             .then(res => {
                 // console.log(res);
+                this.total_pages = res.data.total_pages; //must be set before movies
                 Array.prototype.push.apply(this.movies,
                     res.data.results.map((movie) => {
                         if (typeof (movie["query"]) === "undefined")
@@ -39,7 +48,7 @@ class SearchStore {
                         movie["query"].push(query);
                         return movie;
                     }));
-                console.log(this.movies);
+                // console.log(this.movies);
             });
     }
 }

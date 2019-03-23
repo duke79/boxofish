@@ -67,7 +67,7 @@ class InfiniteScroll extends React.Component {
         return (
             <div {...this.props} ref={this.myRef}>
                 {this.props.children}
-                {this.props.progress_comp}
+                {this.props.to_show_progress ? <S.CircularProgress/> : null}
             </div>
         );
     }
@@ -80,7 +80,7 @@ InfiniteScroll.defaultProps = {
     to_load_more: function () {
         return true;
     },
-    progress_comp: <S.CircularProgress/>
+    to_show_progress: true
 };
 
 export default InfiniteScroll;

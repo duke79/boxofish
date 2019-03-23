@@ -20,6 +20,7 @@ S.Container = styled.div`
 
 S.Result = styled.div`
   margin-top: 10px;
+  padding: 8px;
 `;
 
 S.Bar = styled.div`
@@ -27,7 +28,7 @@ S.Bar = styled.div`
   grid-template-columns: 50px auto;
   box-shadow: 0 0 6px 1px #00000063;
   padding-bottom: 10px;
-  //background: aliceblue;
+  background: #3f51b5;
 `;
 
 S.Back = styled.div`
@@ -39,6 +40,7 @@ S.BackIcon = styled(BackIcon)`
   margin-left: auto;
   margin-right: 12px;
   cursor: pointer;
+  color: white;
 `;
 
 S.Input = styled(Input)`
@@ -46,6 +48,8 @@ S.Input = styled(Input)`
     padding: 5px 5px 5px 8px;
     outline: none;
     border: black solid 0;
+    background: #3f51b5;
+    color: white;
 `;
 
 @observer
@@ -98,6 +102,7 @@ class Search extends React.Component {
                                     <S.BackIcon/>
                                 </S.Back>
                                 <S.Input
+                                    autoFocus
                                     onChangeCustom={value => {
                                         if (this.state.query !== value) {
                                             this.state.query = value;
@@ -111,7 +116,7 @@ class Search extends React.Component {
                                 <InfiniteScroll
                                     load_more={this.load_more}
                                     to_load_more={this.to_load_more}
-                                    progress_comp={null}>
+                                    to_show_progress={store.are_more_pages(this.state.query)}>
                                     <div {...this.props}>
                                         <Grid container
                                               spacing={16}
