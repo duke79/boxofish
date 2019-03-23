@@ -16,9 +16,11 @@ class SearchStore {
     });
 
     load_page = action("load_page", function (val, query = "alita") {
-        console.log("Loading... " + query);
-        this.page[query] = val;
-        this.append_movies(query);
+        if(query.length > 0) {
+            console.log("Loading... " + query);
+            this.page[query] = val;
+            this.append_movies(query);
+        }
     });
 
     append_movies(query) {

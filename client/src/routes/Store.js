@@ -29,7 +29,7 @@ class Store {
     });
 
     load_page = action("load_page", function (val, collection_name = "top_rated") {
-        console.log("Loading... " + collection_name);
+        //console.log("Loading... " + collection_name);
         this.page[collection_name] = val;
         this.append_movies(collection_name);
     });
@@ -43,7 +43,7 @@ class Store {
                 break;
             }
         }
-        console.log(this.movie);
+        //console.log(this.movie);
         this.update_movie_videos();
         this.populate_movie_genres();
         return this.movie;
@@ -64,8 +64,8 @@ class Store {
         if (!this.movie.genre_ids) return;
         if (!this.genres) return;
 
-        console.log(this.movie.genre_ids);
-        console.log(this.genres);
+        //console.log(this.movie.genre_ids);
+        //console.log(this.genres);
 
         this.movie.genres = [];
         for (let i = 0; i < this.movie.genre_ids.length; i++) {
@@ -73,11 +73,11 @@ class Store {
                 if (this.movie.genre_ids[i].toString() === this.genres[j].id.toString())
                     this.movie.genres.push(this.genres[j]);
                 else {
-                    console.log(this.movie.genre_ids[i] +
-                        " & " +
-                        this.genres[j].id +
-                        " are not equal! "
-                    )
+                    // console.log(this.movie.genre_ids[i] +
+                    //     " & " +
+                    //     this.genres[j].id +
+                    //     " are not equal! "
+                    // )
                 }
             }
         }
@@ -99,7 +99,7 @@ class Store {
                         movie["collection_name"].push(collection_name);
                         return movie;
                     }));
-                console.log(this.movies);
+                //console.log(this.movies);
             });
     }
 
@@ -109,12 +109,12 @@ class Store {
                 `${tmdb_api_home}/genre/movie/list?api_key=${tmdb_api_key}`
             )
             .then(res => {
-                console.log(res.data);
+                //console.log(res.data);
                 Array.prototype.push.apply(this.genres,
                     res.data.genres ? res.data.genres.map((genre) => {
                         return genre;
                     }) : null);
-                console.log(this.genres);
+                //console.log(this.genres);
             });
     }
 }

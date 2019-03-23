@@ -10,15 +10,16 @@ import {ResponsivePoster} from "../components/MovieCard";
 import InfiniteScroll from "../components/InfiniteScroll";
 import {Observer, observer} from "mobx-react";
 import {computed} from "mobx";
+import Input from "../components/Input"
 
 let S = {};
 S.Container = styled.div`
   display: grid;
-  grid-template-rows: 60px auto;
+  grid-template-rows: 50px auto;
 `;
 
 S.Result = styled.div`
-
+  margin-top: 10px;
 `;
 
 S.Bar = styled.div`
@@ -40,7 +41,7 @@ S.BackIcon = styled(BackIcon)`
   cursor: pointer;
 `;
 
-S.Input = styled.input`
+S.Input = styled(Input)`
     margin: 5px;
     padding: 5px 5px 5px 8px;
     outline: none;
@@ -78,7 +79,7 @@ class Search extends React.Component {
 
     @computed get movies() {
         return store.movies ? store.movies.map(function (movie) {
-            console.log(movie);
+            // console.log(movie);
             if (movie.query.includes(this.state.query)) {
                 return movie;
             }
@@ -86,7 +87,7 @@ class Search extends React.Component {
     }
 
     render() {
-        console.log("dendering!");
+        // console.log("dendering!");
         return (
             <Route render={({history}) => (
                 <Observer>
@@ -96,16 +97,21 @@ class Search extends React.Component {
                                 <S.Back onClick={e => history.goBack()}>
                                     <S.BackIcon/>
                                 </S.Back>
-                                <S.Input onChange={e => {
-                                    this.state.query = e.currentTarget.value;
-                                    console.log("Searching..." + this.state.query);
-                                    this.load_more(this.state.query);
-                                }}/>
+                                <S.Input
+                                    onChangeCustom={value => {
+                                        if (this.state.query !== value) {
+                                            this.state.query = value;
+                                            // console.log("Searching..." + this.state.query);
+                                            this.load_more(this.state.query);
+                                        }
+                                    }}
+                                    placeholder={"Search..."}/>
                             </S.Bar>
                             <S.Result>
                                 <InfiniteScroll
                                     load_more={this.load_more}
-                                    to_load_more={this.to_load_more}>
+                                    to_load_more={this.to_load_more}
+                                    progress_comp={null}>
                                     <div {...this.props}>
                                         <Grid container
                                               spacing={16}
