@@ -2,12 +2,12 @@
     "name": "com.boxofish",
     "displayName": "boxofish",
     "version": "1.0.0",
-    "description": "A sample Apache Cordova application that responds to the deviceready event.",
+    "description": "Every fish see the world differently, every fish deserves its own pick.",
     "main": "index.js",
     "scripts": {
         "test": "echo \"Error: no test specified\" && exit 1"
     },
-    "author": "Apache Cordova Team",
+    "author": "Vilokan Labs",
     "license": "Apache-2.0",
     "dependencies": {
         "cordova-android": "^7.1.0",
