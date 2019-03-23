@@ -84,9 +84,9 @@ function Overview(props) {
 function Ratings(props) {
     return (
         <div>
-        <Typography gutterBottom variant="h5" {...props}>
-            {props.vote_average ? props.vote_average : 0}
-        </Typography>
+            <Typography gutterBottom variant="h5" {...props}>
+                {props.vote_average ? props.vote_average : 0}
+            </Typography>
         </div>
     );
 }
@@ -182,12 +182,13 @@ S.PageLayout = styled(PageLayout)`
 class MoviePage extends React.Component {
     constructor(props) {
         super(props);
+        console.log("Movie id: " + this.props.match.params.id);
         let movie = store.get_movie(this.props.match.params.id);
     }
 
     render() {
         console.log("rendering!");
-        // console.log(store.movie.videos);
+        console.log(store.movie);
         return (
             <div>
                 <S.PageLayout movie={store.movie} {...this.props}/>

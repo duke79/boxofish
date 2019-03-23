@@ -43,11 +43,24 @@ class Store {
                 break;
             }
         }
-        //console.log(this.movie);
+        this.update_movie_details(id);
         this.update_movie_videos();
         this.populate_movie_genres();
         return this.movie;
     });
+
+    update_movie_details(id){
+        console.log(`${tmdb_api_home}/movie/${id}?api_key=${tmdb_api_key}`);
+        axios
+            .get(
+                `${tmdb_api_home}/movie/${id}?api_key=${tmdb_api_key}`
+            )
+            .then(res => {
+                console.log("movie: ");
+                console.log(res.data);
+                this.movie = res.data;
+            });
+    }
 
     update_movie_videos(id) {
         axios
